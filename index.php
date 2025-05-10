@@ -1,0 +1,6 @@
+<?php 
+//gestion des url 
+
+
+
+?>
