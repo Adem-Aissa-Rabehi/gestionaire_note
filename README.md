@@ -8,6 +8,7 @@ Développeurs et étudiants souhaitant apprendre PHP MVC et Ajax.
 Personnes cherchant un outil simple pour gérer leurs notes en ligne.
 
 2. Fonctionnalités
+
 ✅ 1. Gestion des notes
 Ajouter une nouvelle note.
 
