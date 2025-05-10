@@ -1,0 +1,29 @@
+# Ignorer tous les fichiers Markdown
+*.md
+
+# Ignorer les fichiers de configuration sensibles
+/config/database.php
+
+# Ignorer la base de données SQLite3
+/data/*.db
+
+# Ignorer les fichiers temporaires ou de cache
+*.log
+*.cache
+
+# Ignorer les fichiers générés par l'IDE (VS Code, JetBrains, etc.)
+.idea/
+.vscode/
+*.bak
+
+# Ignorer les dépendances PHP Composer (si utilisé)
+vendor/
+
+# Ignorer les fichiers de sessions et logs PHP
+sess_*
+php_errors.log
+
+# Ignorer les fichiers générés par le serveur Apache ou Nginx
+.htaccess
+.DS_Store
+
