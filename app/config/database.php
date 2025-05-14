@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/db_config.php';
+require_once '/db_config.php';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
