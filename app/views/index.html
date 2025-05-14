@@ -1,27 +1,56 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Calendrier</title>
-    <link rel="stylesheet" href="../../public/css/styles.css">
+    <meta charset="UTF-8" />
+    <title>Calendrier avec Sidebar</title>
+    <link rel="stylesheet" href="../../public/css/styles.css" />
 </head>
-<div class="container">
-    <div class="calendar-header">
-        <h1 id="monthYear"></h1>
-        <div class="controls">
-            <select id="yearSelect"></select>
-            <button onclick="goToToday()">Aujourd’hui</button>
-            <button onclick="prevMonth()">←</button>
-            <button onclick="nextMonth()">→</button>
+<body>
+
+<div class="app-container">
+    <!-- Partie gauche : Calendrier -->
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <h1 id="monthYear"></h1>
+            <div class="controls">
+                <select id="yearSelect"></select>
+                <button onclick="goToToday()">Aujourd’hui</button>
+                <button onclick="prevMonth()">←</button>
+                <button onclick="nextMonth()">→</button>
+            </div>
+        </div>
+        <div class="calendar" id="calendar">
+            <!-- Les jours seront insérés ici -->
         </div>
     </div>
 
-    <div class="calendar" id="calendar">
-        <!-- Les jours seront insérés ici -->
+    <!-- Partie droite : Sidebar -->
+    <div class="sidebar" id="taskSidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-title" id="selectedDateTitle">Sélectionnez une date</div>
+            <span class="close-btn" onclick="closeSidebar()">×</span>
+        </div>
+
+        <!-- Tableau des tâches -->
+        <div class="tasks-table-container">
+            <table class="tasks-table" id="tasksTable">
+                <thead>
+                    <tr>
+                        <th>Tache</th>
+                    </tr>
+                </thead>
+                <tbody id="taskList">
+                    <!-- Tâches ajoutées dynamiquement -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Bouton "+" fixe dans la sidebar -->
+        <button class="add-task-btn" onclick="openModal()">+</button>
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal - Formulaire d'ajout de tâche -->
 <div class="modal" id="taskModal">
     <div class="modal-content">
         <div class="modal-header">
@@ -54,6 +83,6 @@
     </div>
 </div>
 
-    <script src="../../public/js/main.js"></script>
+<script src="../../public/js/main.js"></script>
 </body>
 </html>

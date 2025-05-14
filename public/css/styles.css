@@ -5,44 +5,51 @@
 }
 
 body {
+    font-family: Arial, sans-serif;
     background-color: #000;
     color: #fff;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    padding: 2rem;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
 }
 
-.container {
-    max-width: 900px;
-    margin: auto;
+.app-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Calendrier - Gauche */
+.calendar-container {
+    width: 100%;
+    padding: 2rem;
+    overflow-y: auto;
+    transition: width 0.3s ease;
+}
+
+.sidebar.open ~ .calendar-container {
+    width: calc(100% - 20%);
 }
 
 .calendar-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
     margin-bottom: 1rem;
 }
 
-.calendar-header h1 {
-    font-size: 1.5rem;
-}
-
-.controls {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.controls button, .controls select {
+.controls button,
+.controls select {
     background: #fff;
     color: #000;
     border: none;
     padding: 0.4rem 0.8rem;
+    margin-bottom: 1rem;
     cursor: pointer;
     font-weight: bold;
     border-radius: 3px;
+    margin-left: 5px;
 }
 
 .calendar {
@@ -90,6 +97,98 @@ body {
     text-align: center;
 }
 
+/* Sidebar - Droite */
+.sidebar {
+    width: 0;
+    background: #111;
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border-left: 1px solid #222;
+}
+
+.sidebar.open {
+    width: 20%;
+}
+
+.sidebar.hidden {
+    width: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.sidebar-title {
+    font-size: 1.5rem;
+}
+.close-btn {
+    background: #f39c12;
+    color: #000;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+.tasks-table-container {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.tasks-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.tasks-table thead {
+    background: #222;
+}
+
+.tasks-table th,
+.tasks-table td {
+    padding: 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid #222;
+}
+
+.tasks-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Bouton "+" toujours visible en bas à droite de la sidebar */
+.add-task-btn {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    line-height: 36px;
+    text-align: center;
+    padding: 0;
+    border-radius: 50%;
+    background: #fff;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.2s ease;
+}
+
+.add-task-btn:hover {
+    transform: scale(1.1);
+}
+
 /* Modal */
 .modal {
     display: none;
@@ -121,16 +220,6 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
-}
-
-.modal-title {
-    font-size: 1.2rem;
-}
-
-.close-btn {
-    font-size: 1.5rem;
-    cursor: pointer;
-    font-weight: bold;
 }
 
 .form-group {

@@ -19,4 +19,4 @@
             console.log("Tâche envoyée :", data);
             alert("Tâche ajoutée (simulé)");
             closeModal();
-        });
+        });     
