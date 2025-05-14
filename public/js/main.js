@@ -21,7 +21,7 @@ function renderCalendar(date) {
 
     calendar.innerHTML = "";
 
-    const daysOfWeek = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
+    const daysOfWeek = ["Dim","Lun", "Mar", "Mer", "Jeu", "Ven", "Sam" ];
     daysOfWeek.forEach(day => {
         const div = document.createElement("div");
         div.classList.add("day-header");
