@@ -1,0 +1,159 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    padding: 2rem;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.calendar-header h1 {
+    font-size: 1.5rem;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.controls button, .controls select {
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-top: 1rem;
+}
+
+.day-header {
+    text-align: center;
+    font-weight: bold;
+    background: #111;
+    padding: 0.5rem 0;
+    border: 1px solid #222;
+}
+
+.day {
+    background: #111;
+    padding: 1rem;
+    min-height: 80px;
+    position: relative;
+    border: 1px solid #222;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.day:hover {
+    background: #1a1a1a;
+}
+
+.day-number {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.today {
+    background: #f39c12 !important;
+    color: #000;
+    border-radius: 50%;
+    padding: 0.3rem 0.6rem;
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    text-align: center;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: #111;
+    padding: 2rem;
+    width: 90%;
+    max-width: 500px;
+    border: 1px solid #222;
+    border-radius: 4px;
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.modal-title {
+    font-size: 1.2rem;
+}
+
+.close-btn {
+    font-size: 1.5rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+}
+
+input[type="text"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.5rem;
+    background: #000;
+    border: 1px solid #444;
+    color: #fff;
+    resize: vertical;
+}
+
+textarea {
+    height: 80px;
+}
