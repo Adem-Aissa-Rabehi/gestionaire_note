@@ -7,11 +7,24 @@
 </head>
 <body>
 
+<body>
+
+<!-- HEADER GLOBAL -->
+<div class="global-header">
+    <h1>Gestionnaire de Tâches</h1>
+    <div class="view-selector">
+        <button class="view-btn active" data-view="mensuel">Mensuel</button>
+        <button class="view-btn" data-view="hebdomadaire">Hebdomadaire</button>
+        <button class="view-btn" data-view="annuel">Annuel</button>
+    </div>
+</div>
+
+<!-- CONTENU PRINCIPAL -->
 <div class="app-container">
     <!-- Partie gauche : Calendrier -->
     <div class="calendar-container">
         <div class="calendar-header">
-            <h1 id="monthYear"></h1>
+            <h2 id="monthYear"></h2>
             <div class="controls">
                 <select id="yearSelect"></select>
                 <button onclick="goToToday()">Aujourd’hui</button>
@@ -36,7 +49,8 @@
             <table class="tasks-table" id="tasksTable">
                 <thead>
                     <tr>
-                        <th>Tache</th>
+                        <th>Titre</th>
+                        <th>Type</th>
                     </tr>
                 </thead>
                 <tbody id="taskList">
@@ -83,6 +97,46 @@
     </div>
 </div>
 
+<!-- Modal - Détails / Modification / Suppression -->
+<div class="modal" id="taskDetailsModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title">Détails de la tâche</div>
+            <span class="close-btn" onclick="closeDetailsModal()">&times;</span>
+        </div>
+        <form id="taskDetailsForm">
+            <input type="hidden" id="editTaskId" />
+
+            <div class="form-group">
+                <label for="editTitle">Titre</label>
+                <input type="text" id="editTitle" required />
+            </div>
+
+            <div class="form-group">
+                <label for="editDescription">Description</label>
+                <textarea id="editDescription"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="editType">Type de tâche</label>
+                <select id="editType">
+                    <option value="quotidienne">Quotidienne</option>
+                    <option value="mensuelle">Mensuelle</option>
+                    <option value="annuelle">Annuelle</option>
+                    <option value="unique">Unique</option>
+                    <option value="conditionnelle">Conditionnelle</option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit">Modifier</button>
+                <button type="button" onclick="deleteTask()" style="background: #e74c3c;">Supprimer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script src="../../public/js/main.js"></script>
+<script src="../../public/js/ajax.js"></script>
 </body>
 </html>

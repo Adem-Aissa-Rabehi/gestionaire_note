@@ -10,17 +10,58 @@ body {
     color: #fff;
     height: 100vh;
     display: flex;
-    overflow: hidden;
+    flex-direction: column;
 }
 
+/* HEADER GLOBAL */
+.global-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #111;
+    border-bottom: 1px solid #222;
+}
+
+.global-header h1 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.view-selector {
+    display: flex;
+    gap: 10px;
+}
+
+.view-btn {
+    background: transparent;
+    color: #fff;
+    border: 1px solid #444;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    border-radius: 3px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.view-btn:hover {
+    background: #333;
+}
+
+.view-btn.active {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+/* CONTAINER PRINCIPAL */
 .app-container {
     display: flex;
-    width: 100%;
-    height: 100vh;
+    flex: 1;
     overflow: hidden;
 }
 
-/* Calendrier - Gauche */
+/* CALENDRIER - Gauche */
 .calendar-container {
     width: 100%;
     padding: 2rem;
@@ -45,11 +86,11 @@ body {
     color: #000;
     border: none;
     padding: 0.4rem 0.8rem;
-    margin-bottom: 1rem;
     cursor: pointer;
     font-weight: bold;
     border-radius: 3px;
     margin-left: 5px;
+    margin-bottom: 1rem;
 }
 
 .calendar {
@@ -68,10 +109,10 @@ body {
 }
 
 .day {
+    position: relative;
     background: #111;
     padding: 1rem;
     min-height: 80px;
-    position: relative;
     border: 1px solid #222;
     cursor: pointer;
     transition: background 0.2s;
@@ -97,25 +138,44 @@ body {
     text-align: center;
 }
 
-/* Sidebar - Droite */
+.task-indicator {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 6px;
+    height: 6px;
+    background: #f1c40f;
+    border-radius: 50%;
+    display: none;
+}
+
+.day.has-tasks .task-indicator {
+    display: block;
+}
+
+/* SIDEBAR - Droite */
 .sidebar {
     width: 0;
     background: #111;
     padding-top: 2rem;
     display: flex;
     flex-direction: column;
-    transition: width 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease;
     position: relative;
     overflow: hidden;
     border-left: 1px solid #222;
+    z-index: 100;
 }
 
 .sidebar.open {
-    width: 20%;
+    transform: translateX(0);
+    opacity: 1;
+    width:20%;
 }
 
 .sidebar.hidden {
-    width: 0;
+    transform: translateX(100%);
+    opacity: 0;
 }
 
 .sidebar-header {
@@ -126,16 +186,7 @@ body {
 }
 
 .sidebar-title {
-    font-size: 1.5rem;
-}
-.close-btn {
-    background: #f39c12;
-    color: #000;
-    border: none;
-    padding: 0.4rem 0.8rem;
-    cursor: pointer;
-    font-weight: bold;
-    border-radius: 3px;
+    font-size: 1.2rem;
 }
 
 .tasks-table-container {
@@ -163,8 +214,52 @@ body {
 .tasks-table tr:last-child td {
     border-bottom: none;
 }
+.close-btn {
+    background: #e74c3c;
+    padding: 0.5rem 1rem;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+.task-item {
+    padding: 0.6rem 0.8rem;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #222;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
 
-/* Bouton "+" toujours visible en bas à droite de la sidebar */
+.task-item:hover {
+    transform: scale(1.02);
+}
+
+/* Couleurs par type */
+.task-item.quotidienne { background-color: #f1c40f; }
+.task-item.mensuelle { background-color: #3498db; }
+.task-item.annuelle { background-color: #2ecc71; }
+.task-item.unique { background-color: #95a5a6; }
+.task-item.conditionnelle { background-color: #e67e22; }
+
+/* Modal détail de tâche */
+#taskDetailsModal .form-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+#taskDetailsModal button[type="submit"] {
+    flex: 1;
+    background-color: #fff;
+    color: #000;
+}
+
+#taskDetailsModal button[type="button"] {
+    background-color: #e74c3c;
+    color: white;
+}
+
 .add-task-btn {
     position: absolute;
     bottom: 2rem;
@@ -182,14 +277,16 @@ body {
     border: none;
     cursor: pointer;
     z-index: 10;
-    transition: transform 0.2s ease;
+    animation: pulse 2s infinite;
 }
 
-.add-task-btn:hover {
-    transform: scale(1.1);
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }
 
-/* Modal */
+/* MODAL */
 .modal {
     display: none;
     position: fixed;
@@ -245,4 +342,52 @@ textarea {
 
 textarea {
     height: 80px;
+}
+
+/* VUE ANNUELLE */
+.year-row {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    padding: 1rem;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+}
+
+.year-view {
+    flex: 0 0 300px;
+    background: #1a1a1a;
+    border: 1px solid #222;
+    padding: 1rem;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    scroll-snap-align: center;
+    flex-shrink: 0;
+}
+
+.year-view h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.annual-month-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+}
+
+.annual-month {
+    background: #111;
+    padding: 0.8rem;
+    border: 1px solid #222;
+    text-align: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    border-radius: 3px;
+    transition: background 0.2s ease;
+}
+
+.annual-month:hover {
+    background: #1a1a1a;
 }
